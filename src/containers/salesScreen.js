@@ -1,21 +1,20 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
-const landingScreen = (props) => {
-  const {push, navigate} = props.navigation;
-  console.log(props);
+const landingScreen = ({navigation: {navigate}}) => {
   return (
     <View
       style={{
         borderWidth: 1,
         flex: 1,
-        backgroundColor: 'pink',
+        backgroundColor: 'yellow',
         alignContent: 'center',
         justifyContent: 'center',
       }}>
-      <Text>This is a landing screen</Text>
-      <TouchableOpacity onPress={() => navigate('MyModal')}>
-        <Text>Navigator to OTP</Text>
+      <Text>This is a Sales Screen</Text>
+      <TouchableOpacity
+        onPress={() => navigate('SalesAccount', {id: 'abcsd123781'})}>
+        <Text>Navigator to Sales Account</Text>
       </TouchableOpacity>
     </View>
   );

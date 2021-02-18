@@ -3,7 +3,14 @@ import {View, Text, TouchableOpacity, Platform} from 'react-native';
 
 const otpScreen = ({navigation: {navigate}}) => {
   return (
-    <View style={{borderWidth: 1, flex: 1, backgroundColor: 'cyan'}}>
+    <View
+      style={{
+        borderWidth: 1,
+        flex: 1,
+        backgroundColor: 'cyan',
+        alignContent: 'center',
+        justifyContent: 'center',
+      }}>
       <Text>This is an OTP screen</Text>
       <TouchableOpacity onPress={() => navigate('Setting')}>
         <Text>Navigate to Home</Text>
