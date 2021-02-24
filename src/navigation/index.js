@@ -35,19 +35,10 @@ function Index() {
 export default Index;
 
 const RootTabNavigator = () => {
-  const getTabBarVisibility = (route) => {
-    const routeIndex = route.state ? route.state.index : 0;
-    return routeIndex === 0 ? true : false;
-  };
-
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={LandingScreen} />
-      <Tab.Screen
-        name="Sales"
-        component={SalesStackNavigator}
-        options={({route}) => ({tabBarVisible: getTabBarVisibility(route)})}
-      />
+      <Tab.Screen name="Sales" component={SalesStackNavigator} />
       <Tab.Screen name="OTP" component={OtpScreen} />
       <Tab.Screen name="OTP1" component={OtpScreen} />
     </Tab.Navigator>
