@@ -7,13 +7,15 @@
  */
 
 import React from 'react';
-import {SafeAreaView} from 'react-native';
-import Navigator from './src/navigation';
+import {SafeAreaView, View, Text} from 'react-native';
+// import Navigator from './src/navigation';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Navigator />
+      <View testID={'view_container'} style={{flex: 1, justifyContent:'center', alignContent:'center'}}>
+        <Text testID={'text_label'}>Hello world, you've made it.</Text>
+      </View>
     </SafeAreaView>
   );
 };
