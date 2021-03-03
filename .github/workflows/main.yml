@@ -35,12 +35,12 @@ jobs:
     runs-on: macos-latest
     steps: 
       - uses: actions/checkout@v2
-      - name: Install yarn dependencies
-        run: |
-          yarn install
-      - name: Install pod dependencies
-        run: |
-          cd ios && pod install
+#       - name: Install yarn dependencies
+#         run: |
+#           yarn install
+#       - name: Install pod dependencies
+#         run: |
+#           cd ios && pod install
       - name: Build app
         run: |
           cd ios
