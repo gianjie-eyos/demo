@@ -14,14 +14,14 @@ jobs:
   build-android:
     needs: install-and-test
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v2
       - name: Install yarn dependencies
         run: |
           yarn install
       - name: Run test
         run: |
-          yarn test-ci
+          yarn test
       - name: Build Android Release
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
