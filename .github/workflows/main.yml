@@ -11,28 +11,28 @@ jobs:
       - name: Install yarn dependencies
         run: |
           yarn install
-  build-android:
-    needs: install-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install yarn dependencies
-        run: |
-          yarn install
-      - name: Run test
-        run: |
-          yarn test
-      - name: Build Android Release
-        run: |
-          cd android && ./gradlew assembleRelease --no-daemon
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+#   build-android:
+#     needs: install-and-test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Install yarn dependencies
+#         run: |
+#           yarn install
+#       - name: Run test
+#         run: |
+#           yarn test
+#       - name: Build Android Release
+#         run: |
+#           cd android && ./gradlew assembleRelease --no-daemon
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: app-release.apk
+#           path: android/app/build/outputs/apk/release/
   build-ios:
     needs: install-and-test
-    runs-on: [self-hosted, macos]
+    runs-on: macos-latest
     steps: 
       - uses: actions/checkout@v2
       - name: Install yarn dependencies
