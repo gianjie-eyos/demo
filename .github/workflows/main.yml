@@ -42,7 +42,8 @@ jobs:
         run: |
           cd ios && pod install
       - name: Build app
-        run: |       
+        run: |
+          cd ios
           xcodebuild -workspace demo.xcworkspace -scheme demo archive -archivePath demo.xcarchive -allowProvisioningUpdates
           xcodebuild -exportArchive -archivePath ./demo.xcarchive -exportPath . -exportOptionsPlist demo/Info.plist
           mv demo.ipa ../demo.ipa
