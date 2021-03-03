@@ -30,3 +30,24 @@ jobs:
         with:
           name: app-release.apk
           path: android/app/build/outputs/apk/release/
+  build-ios:
+    needs: install-and-test
+    runs-on: [self-hosted, macos]
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Install yarn dependencies
+        run: |
+          yarn install
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
+      - name: Build app
+        run: |       
+          xcodebuild -workspace demo.xcworkspace -scheme demo archive -archivePath demo.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath ./demo.xcarchive -exportPath . -exportOptionsPlist demo/Info.plist
+          mv demo.ipa ../demo.ipa
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: demo.ipa
+          path: ios/build/
