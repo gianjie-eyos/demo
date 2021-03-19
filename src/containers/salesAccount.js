@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
-const SalesAccount = (props) => {
-  console.log(props);
+const SalesAccount = props => {
   const {push, navigate} = props.navigation;
   const {params} = props.route;
   const {id} = params;

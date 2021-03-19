@@ -1,23 +1,37 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-const landingScreen = ({navigation: {navigate}}) => {
+const salesScreen = ({info, apple}) => {
   return (
-    <View
-      style={{
-        borderWidth: 1,
-        flex: 1,
-        backgroundColor: 'yellow',
-        alignContent: 'center',
-        justifyContent: 'center',
-      }}>
-      <Text>This is a Sales Screen</Text>
-      <TouchableOpacity
-        onPress={() => navigate('SalesAccount', {id: 'abcsd123781'})}>
-        <Text>Navigator to Sales Account</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <Text style={{textAlign: 'center'}}>
+        {info} {apple}
+      </Text>
     </View>
   );
 };
 
-export default landingScreen;
+const mapStateToProps = (state, ownProps) => {
+  const {apple, info} = state.apple;
+  return {apple, info};
+};
+
+export default connect(
+  mapStateToProps,
+  {},
+)(salesScreen);
+
+const styles = {
+  container: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  buttonStyle: {
+    margin: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+};

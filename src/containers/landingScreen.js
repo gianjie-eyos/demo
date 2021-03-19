@@ -1,51 +1,96 @@
-import React, {memo} from 'react';
+import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  Button,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+  onIncreaseAppleNumber,
+  onDecreaseAppleNumber,
+  onIncreasePearNumber,
+  onDecreasePearNumber,
+} from '../redux/action';
 
-const landingScreen = (props) => {
-  const {push, navigate} = props.navigation;
-  const array = [];
-
+const landingScreen = ({
+  info,
+  apple,
+  pear,
+  pearInfo,
+  onIncreaseAppleNumber,
+  onDecreaseAppleNumber,
+  onIncreasePearNumber,
+  onDecreasePearNumber,
+}) => {
   return (
     <View style={styles.container}>
-      <FlatList
-        style={{borderWidth: 1}}
-        data={array}
-        keyExtractor={(e) => e.toString()}
-        initialNumToRender={4}
-        maxToRenderPerBatch={5}
-        updateCellsBatchingPeriod={5}
-        windowSize={1}
-        renderItem={({item, index}) => <MemoText item={item} />}
-        onEndReached={() => console.log('Have the end of the flatlist')}
-        onEndReachedThreshold={0.2}
-        ListEmptyComponent={() => <Text>Empty View!</Text>}
-      />
+      <Text style={{textAlign: 'center'}}>
+        {info} {apple}
+      </Text>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => onIncreaseAppleNumber(1)}>
+          <Text>We got more apples (+)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => onDecreaseAppleNumber(1)}>
+          <Text>Apples are rotten (-)</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={{textAlign: 'center'}}>
+        {pearInfo} {pear}
+      </Text>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => onIncreasePearNumber(1)}>
+          <Text>We got more pears (+)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => onDecreasePearNumber(1)}>
+          <Text>Pears are rotten (-)</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export default landingScreen;
+const mapStateToProps = (state, ownProps) => {
+  const {apple, info} = state.apple;
+  const {pear, info: pearInfo} = state.pear;
 
-const MemoText = memo(({item}) => {
-  console.log(`item: ${item} is rendering`);
-  return (
-    <View style={{borderWidth: 1, height: 450}}>
-      <Text>{item}</Text>
-    </View>
-  );
-});
+  return {apple, info, pear, pearInfo};
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    onIncreaseAppleNumber,
+    onDecreaseAppleNumber,
+    onIncreasePearNumber,
+    onDecreasePearNumber,
+  },
+)(landingScreen);
 
 const styles = {
   container: {
     flex: 1,
     alignContent: 'center',
     justifyContent: 'center',
+  },
+  buttonStyle: {
+    margin: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
   },
 };
